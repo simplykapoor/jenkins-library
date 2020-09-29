@@ -94,8 +94,12 @@ def unstashAll(stashContent) {
     def unstashedContent = []
     if (stashContent) {
         for (i = 0; i < stashContent.size(); i++) {
+            echo "[MH] handling stash content: ${stashContent[i]}"
             if (stashContent[i]) {
+                echo "[MH] unstashing ${stashContent[i]}"
                 unstashedContent += unstash(stashContent[i])
+            } else {
+                echo "[MH] skiped unstashing ${stashContent[i]}"
             }
         }
     } else {
