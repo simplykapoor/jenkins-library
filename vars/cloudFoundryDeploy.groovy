@@ -254,7 +254,7 @@ void call(Map parameters = [:]) {
         echo "[MH] Configuration before unstash: ${config}"
         dir('mystash') {
             utils.unstashAll(config.stashContent)
-            sh "pwd;ls -la"
+            sh "pwd;ls -laR"
         }
         echo "[MH] [${STEP_NAME}] unstash all: ${config.stashContent}/${java.lang.System.identityHashCode(config.stashContent)}"
         utils.unstashAll(config.stashContent)
