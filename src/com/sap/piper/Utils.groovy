@@ -90,6 +90,7 @@ def unstash(name, msg = "Unstash failed:") {
 }
 
 def unstashAll(stashContent) {
+    echo "[MH] entering unstashAll: ${stashContent}"
     def unstashedContent = []
     if (stashContent) {
         for (i = 0; i < stashContent.size(); i++) {
@@ -97,7 +98,10 @@ def unstashAll(stashContent) {
                 unstashedContent += unstash(stashContent[i])
             }
         }
+    } else {
+      echo "[MH] skipped unstashing ${stashContent}"
     }
+    echo "[MH] exiting unstashAll: ${unstashedContent}"
     return unstashedContent
 }
 

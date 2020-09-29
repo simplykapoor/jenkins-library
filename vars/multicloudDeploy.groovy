@@ -112,6 +112,7 @@ void call(parameters = [:]) {
             // credentials are inserted in the mtaExtensionDescriptor file.
             Boolean runInIsolatedWorkspace = config.cfTargets.size() > 1 && (deploymentType == "blue-green" || config.parallelExecution) && !config.runInCurrentWorkspace
 
+            echo "[MH]: isolated workspaces: ${runInIsolatedWorkspace}"
             for (int i = 0; i < config.cfTargets.size(); i++) {
 
                 def target = config.cfTargets[i]
