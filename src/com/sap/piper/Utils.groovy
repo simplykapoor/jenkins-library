@@ -93,7 +93,7 @@ def unstashAll(stashContent) {
     echo "[MH] entering unstashAll: ${stashContent}"
     def unstashedContent = []
     if (stashContent) {
-        for (def i = 0; i < stashContent.size(); i++) {
+        for (int i = 0; i < stashContent.size(); i++) {
             echo "[MH] handling stash content: ${stashContent[i]} / ${stashContent}"
             if (stashContent[i]) {
                 echo "[MH] unstashing ${stashContent[i]}"
