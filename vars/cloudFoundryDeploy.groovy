@@ -252,7 +252,7 @@ void call(Map parameters = [:]) {
 
         //make sure that all relevant descriptors, are available in workspace
         echo "[MH] Configuration before unstash: ${config}"
-        dir "mystash" {
+        dir('mystash') {
             utils.unstashAll(config.stashContent)
             sh "pwd;ls -la"
         }
