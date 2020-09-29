@@ -251,7 +251,11 @@ void call(Map parameters = [:]) {
         echo "[${STEP_NAME}] General parameters: deployTool=${config.deployTool}, deployType=${config.deployType}, cfApiEndpoint=${config.cloudFoundry.apiEndpoint}, cfOrg=${config.cloudFoundry.org}, cfSpace=${config.cloudFoundry.space}, cfCredentialsId=${config.cloudFoundry.credentialsId}"
 
         //make sure that all relevant descriptors, are available in workspace
-        echo "[MH] Configuration before unstash merge: ${config}"
+        echo "[MH] Configuration before unstash: ${config}"
+        dir "mystash" {
+            utils.unstashAll(config.stashContent)
+            sh "pwd;ls -la"
+        }
         echo "[MH] [${STEP_NAME}] unstash all: ${config.stashContent}/${java.lang.System.identityHashCode(config.stashContent)}"
         utils.unstashAll(config.stashContent)
         //make sure that for further execution whole workspace, e.g. also downloaded artifacts are considered
