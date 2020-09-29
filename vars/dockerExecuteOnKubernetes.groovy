@@ -279,6 +279,7 @@ void executeOnPod(Map config, utils, Closure body, Script script) {
                     echo "ContainerConfig: ${containerParams}"
                     container(containerParams) {
                         try {
+                            echo "[MH] [${STEP_NAME}] unstash all: ${config.stashContent}/${java.lang.System.identityHashCode(config.stashContent)}"
                             utils.unstashAll(stashContent)
                             echo "invalidate stash workspace-${config.uniqueId}"
                             stash name: "workspace-${config.uniqueId}", excludes: '**/*', allowEmpty: true

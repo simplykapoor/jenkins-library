@@ -227,6 +227,8 @@ void call(Map parameters = [:]) {
             .withMandatoryProperty('cloudFoundry/credentialsId')
             .use()
 
+        echo "[MH] Configuration after merge: ${config}"
+
         if (config.useGoStep == true) {
             List credentials = [
                 [type: 'usernamePassword', id: 'cfCredentialsId', env: ['PIPER_username', 'PIPER_password']],
@@ -249,9 +251,12 @@ void call(Map parameters = [:]) {
         echo "[${STEP_NAME}] General parameters: deployTool=${config.deployTool}, deployType=${config.deployType}, cfApiEndpoint=${config.cloudFoundry.apiEndpoint}, cfOrg=${config.cloudFoundry.org}, cfSpace=${config.cloudFoundry.space}, cfCredentialsId=${config.cloudFoundry.credentialsId}"
 
         //make sure that all relevant descriptors, are available in workspace
+        echo "[MH] Configuration before unstash merge: ${config}"
+        echo "[MH] [${STEP_NAME}] unstash all: ${config.stashContent}/${java.lang.System.identityHashCode(config.stashContent)}"
         utils.unstashAll(config.stashContent)
         //make sure that for further execution whole workspace, e.g. also downloaded artifacts are considered
         config.stashContent = []
+        echo "[MH] [${STEP_NAME}] stash config resetted."
 
         // validate cf app name to avoid a failing deployment due to invalid chars
         if (config.cloudFoundry.appName) {

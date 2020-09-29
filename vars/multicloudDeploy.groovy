@@ -122,6 +122,13 @@ void call(parameters = [:]) {
                         deploymentUtils.unstashStageFiles(script, stageName)
                     }
 
+                    def sc = script.commonPipelineEnvironment.configuration
+                    if(sc == null) {
+                        echo "[MH] no stash content"
+                        sc = []
+                    }
+                    echo "[MH] stashContent: ${sc}/${java.lang.System.identityHashCode(sc)}"
+                    echo "[MH] config: ${script.commonPipelineEnvironment.configuration}"
                     cloudFoundryDeploy(
                         script: script,
                         juStabUtils: utils,
