@@ -41,6 +41,11 @@ void call(Map parameters = [:]) {
 
     piperStageWrapper (script: script, stageName: stageName, stageLocking: false) {
         // telemetry reporting
+
+        sh "ls -a || :"
+        sh "ls -a s4hana_pipeline/ || :"
+        sh "ls -a s4hana_pipeline/extensions/ || :"
+        
         utils.pushToSWA([step: STEP_NAME], config)
 
         influxWriteData script: script
