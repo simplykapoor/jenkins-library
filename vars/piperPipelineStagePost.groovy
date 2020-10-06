@@ -66,5 +66,7 @@ void call(Map parameters = [:]) {
         piperPublishWarnings script: script
         echo "After piperPublishWarnings"
         sh "ls -a || :"
+        sh "ls -a s4hana_pipeline/extensions/ || :"
+
     }
 }
