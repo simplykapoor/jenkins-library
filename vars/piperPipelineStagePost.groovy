@@ -45,7 +45,7 @@ void call(Map parameters = [:]) {
         sh "ls -a || :"
         sh "ls -a s4hana_pipeline/ || :"
         sh "ls -a s4hana_pipeline/extensions/ || :"
-        
+
         utils.pushToSWA([step: STEP_NAME], config)
 
         influxWriteData script: script
@@ -57,7 +57,14 @@ void call(Map parameters = [:]) {
         }
 
         mailSendNotification script: script
+        echo "After mailSendNotification"
+        sh "ls -a || :"
         debugReportArchive script: script
+        echo "After debugReportArchive"
+        sh "ls -a || :"
+
         piperPublishWarnings script: script
+        echo "After piperPublishWarnings"
+        sh "ls -a || :"
     }
 }
